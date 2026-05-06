@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { Heart, Loader2 } from "lucide-react";
-import { submitRsvp } from "@/services/rsvpService";
 
 export function RsvpForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -26,17 +25,37 @@ export function RsvpForm() {
     setSubmitting(true);
 
     try {
-      await submitRsvp({
-        name: form.name,
-        email: form.email || null,
-        phone: form.phone || null,
-        guests: form.guests,
-        attending: form.attending,
-        message: form.message || null,
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "8bee4cb2-0df3-4767-9431-78c7045eb2f2",
+          subject: `New RSVP from ${form.name}`,
+          name: form.name,
+          email: form.email || "Not provided",
+          phone: form.phone || "Not provided",
+          guests: form.guests,
+          attending:
+            form.attending === "yes"
+              ? "Yes, joyfully"
+              : form.attending === "no"
+                ? "Regretfully no"
+                : "Not sure yet",
+          message: form.message || "No message",
+        }),
       });
 
-      setDone(true);
-      toast.success("RSVP submitted successfully!");
+      const result = await response.json();
+
+      if (result.success) {
+        setDone(true);
+        toast.success("RSVP submitted successfully!");
+      } else {
+        throw new Error(result.message || "Failed to submit");
+      }
     } catch (error) {
       console.error("Submission error:", error);
       toast.error("Could not submit. Please try again.");

@@ -21,7 +21,10 @@ export const Route = createFileRoute("/")({
           "Join us for the wedding of Dilki & Kasun on June 4, 2026 at The Glasgow – Brilliance Nest Ballroom, Kalagedihena. Sri Lankan traditional ceremony.",
       },
       { property: "og:title", content: "Dilki & Kasun — Wedding Celebration" },
-      { property: "og:description", content: "June 4, 2026 · Kalagedihena, Sri Lanka" },
+      {
+        property: "og:description",
+        content: "June 4, 2026 · Kalagedihena, Sri Lanka",
+      },
     ],
   }),
   component: Index,
@@ -32,7 +35,15 @@ const fade = {
   show: { opacity: 1, y: 0, transition: { duration: 0.9 } },
 };
 
-function Section({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
+function Section({
+  children,
+  className = "",
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}) {
   return (
     <motion.section
       id={id}
@@ -58,7 +69,10 @@ function Index() {
       {/* HERO */}
       <header className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 overflow-hidden">
         <MandalaBg className="absolute -top-40 -left-40 w-[600px]" />
-        <MandalaBg className="absolute -bottom-40 -right-40 w-[600px]" reverse />
+        <MandalaBg
+          className="absolute -bottom-40 -right-40 w-[600px]"
+          reverse
+        />
         <Sparkles count={14} />
 
         <motion.p
@@ -115,8 +129,12 @@ function Index() {
       {/* COUNTDOWN */}
       <Section className="text-center">
         <Divider />
-        <h2 className="gold-text text-3xl sm:text-5xl mb-3">Counting Every Moment</h2>
-        <p className="text-[var(--maroon)] mb-10 italic">until our auspicious day</p>
+        <h2 className="gold-text text-3xl sm:text-5xl mb-3">
+          Counting Every Moment
+        </h2>
+        <p className="text-[var(--maroon)] mb-10 italic">
+          until our auspicious day
+        </p>
         <Countdown />
       </Section>
 
@@ -125,7 +143,9 @@ function Index() {
         <MandalaBg className="absolute top-10 right-0 w-72" />
         <div className="max-w-3xl mx-auto text-center relative">
           <Divider />
-          <h2 className="gold-text text-3xl sm:text-5xl mb-12">Wedding Details</h2>
+          <h2 className="gold-text text-3xl sm:text-5xl mb-12">
+            Wedding Details
+          </h2>
 
           <div className="grid sm:grid-cols-3 gap-6">
             {[
@@ -134,7 +154,9 @@ function Index() {
                 label: "Venue",
                 value: (
                   <>
-                    <span className="text-[var(--gold-deep)] font-semibold">The Glasgow</span>
+                    <span className="text-[var(--gold-deep)] font-semibold">
+                      The Glasgow
+                    </span>
                     <br />
                     Brilliance Nest Ballroom, Kalagedihena
                   </>
@@ -148,13 +170,21 @@ function Index() {
                 initial={{ opacity: 0, y: 40, scale: 0.98 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.75, ease: "easeOut", delay: index * 0.15 }}
+                transition={{
+                  duration: 0.75,
+                  ease: "easeOut",
+                  delay: index * 0.15,
+                }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="relative p-6 rounded-xl border border-[var(--gold)]/40 bg-[var(--ivory)] shadow-elegant glow-edge"
               >
                 <d.icon className="w-7 h-7 mx-auto text-[var(--gold-deep)]" />
-                <p className="mt-3 text-xs tracking-[0.3em] text-[var(--maroon)]">{d.label.toUpperCase()}</p>
-                <p className="mt-2 font-[var(--font-display)] text-[var(--maroon-deep)]">{d.value}</p>
+                <p className="mt-3 text-xs tracking-[0.3em] text-[var(--maroon)]">
+                  {d.label.toUpperCase()}
+                </p>
+                <p className="mt-2 font-[var(--font-display)] text-[var(--maroon-deep)]">
+                  {d.value}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -168,7 +198,11 @@ function Index() {
             >
               View on Map
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V12a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V12a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
               </svg>
             </a>
           </div>
@@ -180,8 +214,12 @@ function Index() {
         <MandalaBg className="absolute -bottom-20 -left-20 w-[500px]" reverse />
         <div className="max-w-xl mx-auto relative">
           <Divider />
-          <h2 className="gold-text text-3xl sm:text-5xl text-center mb-3">Kindly RSVP</h2>
-          <p className="text-center text-[var(--maroon)] italic mb-10">Your presence is our greatest blessing</p>
+          <h2 className="gold-text text-3xl sm:text-5xl text-center mb-3">
+            Kindly RSVP
+          </h2>
+          <p className="text-center text-[var(--maroon)] italic mb-10">
+            Your presence is our greatest blessing
+          </p>
           <RsvpForm />
         </div>
       </Section>
@@ -197,10 +235,13 @@ function Index() {
           transition={{ duration: 1.2 }}
           className="relative"
         >
-          <p className="text-xs tracking-[0.5em] text-[var(--gold-soft)]">WITH GRATITUDE</p>
+          <p className="text-xs tracking-[0.5em] text-[var(--gold-soft)]">
+            WITH GRATITUDE
+          </p>
           <h2 className="gold-text text-4xl sm:text-6xl mt-4">Thank You</h2>
           <p className="mt-6 text-[var(--gold-soft)]/80 max-w-md mx-auto px-6 italic">
-            For sharing in the joy of our beginning. May our love story inspire your own.
+            For sharing in the joy of our beginning. May our love story inspire
+            your own.
           </p>
           <p className="mt-10 font-[var(--font-script)] italic text-2xl text-[var(--gold-soft)]">
             Dilki & Kasun

@@ -21,3 +21,4 @@ credentials.json
 .git-credentials
 .secrets
 secrets/
+.vercel

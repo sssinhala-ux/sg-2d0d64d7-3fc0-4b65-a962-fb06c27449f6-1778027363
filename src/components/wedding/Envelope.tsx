@@ -20,7 +20,10 @@ export function Envelope({ onOpen }: { onOpen: () => void }) {
       transition={{ duration: 0.6, delay: opening ? 1.4 : 0 }}
     >
       <Sparkles count={30} />
-      <div className="relative w-[90vw] max-w-md aspect-[3/4]" style={{ perspective: 1400 }}>
+      <div
+        className="relative w-[90vw] max-w-md aspect-[3/4]"
+        style={{ perspective: 1400 }}
+      >
         <AnimatePresence>
           {!opening && (
             <motion.div
@@ -43,8 +46,12 @@ export function Envelope({ onOpen }: { onOpen: () => void }) {
           animate={opening ? { scale: 1 } : { scale: 0.85 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <p className="text-xs tracking-[0.5em] text-[var(--gold-deep)] mb-2">WEDDING OF</p>
-          <h2 className="gold-text text-3xl sm:text-4xl font-bold">Dilki & Kasun</h2>
+          <p className="text-xs tracking-[0.5em] text-[var(--gold-deep)] mb-2">
+            WEDDING OF
+          </p>
+          <h2 className="gold-text text-3xl sm:text-4xl font-bold">
+            Dilki & Kasun
+          </h2>
           <p className="mt-3 text-[var(--maroon)] text-sm">04 . 06 . 2026</p>
         </motion.div>
 

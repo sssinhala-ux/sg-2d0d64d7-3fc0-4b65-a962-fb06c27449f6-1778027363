@@ -2,7 +2,12 @@ export function Divider() {
   return (
     <div className="flex items-center justify-center gap-4 my-10">
       <span className="h-px w-16 sm:w-32 bg-gradient-to-r from-transparent to-[var(--gold)]" />
-      <svg width="42" height="42" viewBox="0 0 42 42" className="text-[var(--gold-deep)]">
+      <svg
+        width="42"
+        height="42"
+        viewBox="0 0 42 42"
+        className="text-[var(--gold-deep)]"
+      >
         <g fill="none" stroke="currentColor" strokeWidth="1.2">
           <circle cx="21" cy="21" r="3" fill="currentColor" />
           <circle cx="21" cy="21" r="9" />

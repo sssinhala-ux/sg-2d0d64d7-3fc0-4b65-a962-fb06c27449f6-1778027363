@@ -16,7 +16,8 @@ export function Sparkles({ count = 18 }: { count?: number }) {
               bottom: -10,
               width: size,
               height: size,
-              background: "radial-gradient(circle, var(--gold-soft), transparent 70%)",
+              background:
+                "radial-gradient(circle, var(--gold-soft), transparent 70%)",
               boxShadow: "0 0 8px var(--gold)",
               animation: `float-up ${8 + Math.random() * 8}s linear ${delay}s infinite`,
             }}

@@ -53,10 +53,15 @@ export function RsvpForm() {
               transition={{ duration: 1.4, repeat: Infinity }}
               className="mx-auto w-20 h-20 rounded-full maroon-bg flex items-center justify-center shadow-gold-glow"
             >
-              <Heart className="w-10 h-10 text-[var(--gold-soft)]" fill="currentColor" />
+              <Heart
+                className="w-10 h-10 text-[var(--gold-soft)]"
+                fill="currentColor"
+              />
             </motion.div>
             <h3 className="gold-text text-3xl mt-6 font-bold">Thank You!</h3>
-            <p className="text-[var(--maroon)] mt-2">Your blessing means the world to us.</p>
+            <p className="text-[var(--maroon)] mt-2">
+              Your blessing means the world to us.
+            </p>
           </motion.div>
         ) : (
           <motion.form
@@ -72,7 +77,9 @@ export function RsvpForm() {
             <input type="hidden" name="form-name" value={FORM_NAME} />
 
             <div>
-              <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">NAME</label>
+              <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                NAME
+              </label>
               <input
                 name="name"
                 value={form.name}
@@ -83,23 +90,31 @@ export function RsvpForm() {
             </div>
             <div className="grid grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">ATTENDEES</label>
+                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                  ATTENDEES
+                </label>
                 <input
                   name="guests"
                   type="number"
                   min={1}
                   max={10}
                   value={form.guests}
-                  onChange={(e) => setForm({ ...form, guests: Number(e.target.value) })}
+                  onChange={(e) =>
+                    setForm({ ...form, guests: Number(e.target.value) })
+                  }
                   className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2"
                 />
               </div>
               <div>
-                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">ATTENDING</label>
+                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                  ATTENDING
+                </label>
                 <select
                   name="attendance"
                   value={form.attending}
-                  onChange={(e) => setForm({ ...form, attending: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, attending: e.target.value })
+                  }
                   className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2"
                 >
                   <option value="yes">Yes, joyfully</option>
@@ -108,7 +123,9 @@ export function RsvpForm() {
               </div>
             </div>
             <div>
-              <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">MESSAGE</label>
+              <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                MESSAGE
+              </label>
               <textarea
                 name="message"
                 value={form.message}

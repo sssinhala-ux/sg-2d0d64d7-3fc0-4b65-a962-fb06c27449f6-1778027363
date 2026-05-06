@@ -1,6 +1,12 @@
 import mandala from "@/assets/mandala.png";
 
-export function MandalaBg({ className = "", reverse = false }: { className?: string; reverse?: boolean }) {
+export function MandalaBg({
+  className = "",
+  reverse = false,
+}: {
+  className?: string;
+  reverse?: boolean;
+}) {
   return (
     <img
       src={mandala}

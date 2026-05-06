@@ -12,21 +12,6 @@ import couple from "@/assets/couple.png";
 import { MapPin, Clock, Flower2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Dilki & Kasun — Wedding Celebration | June 4, 2026" },
-      {
-        name: "description",
-        content:
-          "Join us for the wedding of Dilki & Kasun on June 4, 2026 at The Glasgow – Brilliance Nest Ballroom, Kalagedihena. Sri Lankan traditional ceremony.",
-      },
-      { property: "og:title", content: "Dilki & Kasun — Wedding Celebration" },
-      {
-        property: "og:description",
-        content: "June 4, 2026 · Kalagedihena, Sri Lanka",
-      },
-    ],
-  }),
   component: Index,
 });
 

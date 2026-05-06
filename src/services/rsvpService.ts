@@ -51,7 +51,7 @@ export function exportRsvpsToCSV(rsvps: RsvpRow[]): string {
     r.guests.toString(),
     r.attending,
     r.message || "",
-    new Date(r.created_at).toLocaleString(),
+    r.created_at ? new Date(r.created_at).toLocaleString() : "",
   ]);
 
   const csvContent = [

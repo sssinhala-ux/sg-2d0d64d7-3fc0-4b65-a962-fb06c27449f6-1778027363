@@ -15,6 +15,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
+// @ts-expect-error - Route auto-generation pending
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
@@ -244,7 +245,7 @@ function AdminPage() {
                         )}
                       </td>
                       <td className="px-6 py-4 text-[var(--maroon)] text-xs">
-                        {new Date(rsvp.created_at).toLocaleString()}
+                        {rsvp.created_at ? new Date(rsvp.created_at).toLocaleString() : "-"}
                       </td>
                     </motion.tr>
                   ))

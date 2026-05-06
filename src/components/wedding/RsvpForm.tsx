@@ -8,10 +8,8 @@ export function RsvpForm() {
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
     name: "",
-    email: "",
-    phone: "",
     guests: 1,
-    attending: "yes" as "yes" | "no" | "maybe",
+    attending: "yes" as "yes" | "no",
     message: "",
   });
 
@@ -35,15 +33,9 @@ export function RsvpForm() {
           access_key: "8bee4cb2-0df3-4767-9431-78c7045eb2f2",
           subject: `New RSVP from ${form.name}`,
           name: form.name,
-          email: form.email || "Not provided",
-          phone: form.phone || "Not provided",
           guests: form.guests,
           attending:
-            form.attending === "yes"
-              ? "Yes, joyfully"
-              : form.attending === "no"
-                ? "Regretfully no"
-                : "Not sure yet",
+            form.attending === "yes" ? "Yes, joyfully" : "Regretfully no",
           message: form.message || "No message",
         }),
       });
@@ -110,34 +102,6 @@ export function RsvpForm() {
                 required
               />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
-                  EMAIL
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2 text-[var(--maroon-deep)]"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
-                  PHONE
-                </label>
-                <input
-                  name="phone"
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2 text-[var(--maroon-deep)]"
-                  placeholder="+94 XX XXX XXXX"
-                />
-              </div>
-            </div>
             <div className="grid grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
@@ -165,14 +129,13 @@ export function RsvpForm() {
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      attending: e.target.value as "yes" | "no" | "maybe",
+                      attending: e.target.value as "yes" | "no",
                     })
                   }
                   className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2"
                 >
                   <option value="yes">Yes, joyfully</option>
                   <option value="no">Regretfully no</option>
-                  <option value="maybe">Not sure yet</option>
                 </select>
               </div>
             </div>

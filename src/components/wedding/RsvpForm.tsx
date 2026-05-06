@@ -2,40 +2,47 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { Heart, Loader2 } from "lucide-react";
-
-const FORM_NAME = "RSVP";
+import { submitRsvp } from "@/services/rsvpService";
 
 export function RsvpForm() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
     name: "",
+    email: "",
+    phone: "",
     guests: 1,
-    attending: "yes",
+    attending: "yes" as "yes" | "no" | "maybe",
     message: "",
   });
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.name.trim()) return toast.error("Please enter your name");
-
-    setSubmitting(true);
-    const formElement = e.currentTarget;
-    const formData = new FormData(formElement);
-
-    const response = await fetch("/", {
-      method: "POST",
-      body: formData,
-    });
-
-    setSubmitting(false);
-
-    if (!response.ok) {
-      toast.error("Could not submit. Please try again.");
+    if (!form.name.trim()) {
+      toast.error("Please enter your name");
       return;
     }
 
-    setDone(true);
+    setSubmitting(true);
+
+    try {
+      await submitRsvp({
+        name: form.name,
+        email: form.email || null,
+        phone: form.phone || null,
+        guests: form.guests,
+        attending: form.attending,
+        message: form.message || null,
+      });
+
+      setDone(true);
+      toast.success("RSVP submitted successfully!");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Could not submit. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -66,19 +73,14 @@ export function RsvpForm() {
         ) : (
           <motion.form
             key="form"
-            name={FORM_NAME}
-            data-netlify="true"
-            method="POST"
             onSubmit={submit}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="space-y-5"
           >
-            <input type="hidden" name="form-name" value={FORM_NAME} />
-
             <div>
               <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
-                NAME
+                NAME *
               </label>
               <input
                 name="name"
@@ -86,7 +88,36 @@ export function RsvpForm() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2 text-[var(--maroon-deep)]"
                 placeholder="Your full name"
+                required
               />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                  EMAIL
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2 text-[var(--maroon-deep)]"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label className="block text-sm tracking-widest text-[var(--maroon)] mb-2">
+                  PHONE
+                </label>
+                <input
+                  name="phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2 text-[var(--maroon-deep)]"
+                  placeholder="+94 XX XXX XXXX"
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-5">
               <div>
@@ -113,12 +144,16 @@ export function RsvpForm() {
                   name="attendance"
                   value={form.attending}
                   onChange={(e) =>
-                    setForm({ ...form, attending: e.target.value })
+                    setForm({
+                      ...form,
+                      attending: e.target.value as "yes" | "no" | "maybe",
+                    })
                   }
                   className="w-full bg-transparent border-b-2 border-[var(--gold)]/50 focus:border-[var(--gold-deep)] outline-none py-2"
                 >
                   <option value="yes">Yes, joyfully</option>
                   <option value="no">Regretfully no</option>
+                  <option value="maybe">Not sure yet</option>
                 </select>
               </div>
             </div>
